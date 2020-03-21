@@ -58,9 +58,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-    {{- if .Values.volumes.enabled }}
+    {{- if .Values.volume.enabled }}
     volumes:
     - name: html-root
-      persisntentVolumeClaim:
-        claimName: {{ .Values.volume.pvcName }}
+      persistentVolumeClaim:
+        claimName: {{ .Values.volume.existingClaim }}
     {{- end }}
