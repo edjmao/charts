@@ -59,8 +59,8 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
     {{- if .Values.volume.enabled }}
-    volumes:
-    - name: html-root
-      persistentVolumeClaim:
-        claimName: {{ .Values.volume.existingClaim }}
+      volumes:
+      - name: html-root
+        persistentVolumeClaim:
+          claimName: {{ .Values.volume.existingClaim }}
     {{- end }}

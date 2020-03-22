@@ -70,4 +70,4 @@ affinity: {}
 
 volume:
   enabled: false
-  pvcName: ''
+  claimName: ''
