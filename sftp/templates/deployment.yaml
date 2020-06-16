@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "sftp.fullname" . }}
+  labels:
+    {{- include "sftp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "sftp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "sftp.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "sftp.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: ssh
+              containerPort: 22
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 22
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            tcpSocket:
+              port: 22
+            initialDelaySeconds: 15
+            periodSeconds: 30
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: users-file
+            mountPath: /etc/sftp/
+            readOnly: true
+          {{- if .Values.homeDir.existingClaim }}
+          - name: home-dir
+            mountPath: /home/{{ .Values.user.name }}/{{ .Values.homeDir.mountSubpath }}
+          {{- end }}
+          {{- if .Values.user.publicKey }}
+          - name: public-key
+            mountPath: /home/{{ .Values.user.name }}/.ssh/keys/
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+      - name: users-file
+        configMap:
+          name: {{ include "sftp.fullname" . }}-configmap
+    {{- if .Values.homeDir.existingClaim }}
+      - name: home-dir
+        persistentVolumeClaim:
+          claimName: {{ .Values.homeDir.existingClaim }}
+    {{- end }}
+    {{- if .Values.user.publicKey }}
+      - name: public-key
+        configMap:
+          name: {{ include "sftp.fullname" . }}-publickey-configmap
+    {{- end }}
