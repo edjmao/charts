@@ -32,13 +32,15 @@ spec:
               containerPort: 8000
               protocol: TCP
           livenessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
           readinessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
+            initialDelaySeconds: 5
+            periodSeconds: 20
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
@@ -47,14 +49,15 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+              subPath: restic-rest-server
       volumes:
         - name: data
-          {{ - if .Values.persistence.existingClaim }}
+          {{- if .Values.persistence.existingClaim }}
           persistentVolumeClaim:
             claimName: {{ .Values.persistence.existingClaim }}
-          {{ - else }}
+          {{- else }}
           emptyDir: {}
-          {{ - end }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
