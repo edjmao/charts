@@ -1,0 +1,10 @@
+{{- if .Values.user.publicKey -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "sftp.fullname" . }}-publickey-configmap
+  labels:
+  {{- include "sftp.labels" . | nindent 4 }}
+data:
+  id_rsa.pub: {{ .Values.user.publicKey | nindent 4 }}
+{{- end -}}
