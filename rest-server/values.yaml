@@ -6,6 +6,7 @@ replicaCount: 1
 
 image:
   repository: restic/rest-server
+  tag: "0.9.7"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -49,6 +50,11 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+persistence:
+  enabled: false
+  existingClaim: ""
+  subPath: ""
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -66,3 +72,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+options:
+  disableAuthentication: false

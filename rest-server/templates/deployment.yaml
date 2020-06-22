@@ -44,12 +44,16 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            - name: OPTIONS
-              value: {{ .Values.options }}
+            {{- if .Values.options.disableAuthentication }}
+            - name: DISABLE_AUTHENTICATION
+              value: "true"
+            {{- end }}
           volumeMounts:
             - name: data
               mountPath: /data
-              subPath: restic-rest-server
+              {{- if .Values.persistence.subPath }}
+              subPath: {{ .Values.persistence.subPath }}
+              {{- end }}
       volumes:
         - name: data
           {{- if .Values.persistence.existingClaim }}
