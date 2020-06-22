@@ -49,7 +49,9 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
-              subPath: restic-rest-server
+              {{- if .Values.persistence.subPath }}
+              subPath: {{ .Values.persistence.subPath }}
+              {{- end }}
       volumes:
         - name: data
           {{- if .Values.persistence.existingClaim }}
