@@ -3,34 +3,44 @@ entries:
   nginx:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-06-21T12:51:23.571191438-05:00"
+    created: "2020-06-22T17:19:47.776703544-05:00"
     description: nginx instance to serve static content
     digest: 75772b9dc6606c16fa0ffbcbaf4ac922bfcbd94ce2fb6c3227fb179e8c84650b
     name: nginx
     type: application
     urls:
-    - https://edjmao.github.io/charts/pkg/nginx-0.1.0.tgz
+    - nginx-0.1.0.tgz
     version: 0.1.0
   rest-server:
   - apiVersion: v2
     appVersion: 0.9.7
-    created: "2020-06-21T12:51:23.572106638-05:00"
+    created: "2020-06-22T17:19:47.825628225-05:00"
+    description: Restic Rest Server for remote backups via HTTP
+    digest: 1e3446a05a82b7e76e835e66d973326dd8e2a627245788db7f57e66b64c84a53
+    name: rest-server
+    type: application
+    urls:
+    - rest-server-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.9.7
+    created: "2020-06-22T17:19:47.778733359-05:00"
     description: Restic Rest Server for remote backups via HTTP
     digest: edadc9013f417a0b259b9cbfba59e44675c03d3e455129d562f668844781280e
     name: rest-server
     type: application
     urls:
-    - https://edjmao.github.io/charts/pkg/rest-server-0.1.0.tgz
+    - rest-server-0.1.0.tgz
     version: 0.1.0
   sftp:
   - apiVersion: v2
     appVersion: debian
-    created: "2020-06-21T12:51:23.573010422-05:00"
+    created: "2020-06-22T17:19:47.827873642-05:00"
     description: SFTP server
     digest: e5208dee8f2dfe5ba539ce629ac017aa52699538ad20e49848b21ebf20fa2d6a
     name: sftp
     type: application
     urls:
-    - https://edjmao.github.io/charts/pkg/sftp-0.1.0.tgz
+    - sftp-0.1.0.tgz
     version: 0.1.0
-generated: "2020-06-21T12:51:23.567929418-05:00"
+generated: "2020-06-22T17:19:47.773960843-05:00"
