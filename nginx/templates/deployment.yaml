@@ -45,6 +45,7 @@ spec:
           volumeMounts:
           - name: html-root
             mountPath: /usr/share/nginx/html
+            subPath: {{ .Values.volume.subPath }}
           {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
