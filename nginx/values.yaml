@@ -71,3 +71,4 @@ affinity: {}
 volume:
   enabled: false
   claimName: ''
+  subPath: ''
