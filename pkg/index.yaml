@@ -1,9 +1,20 @@
 apiVersion: v1
 entries:
+  factorio:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2020-09-12T21:48:44.718211814-05:00"
+    description: Factorio dedicated server
+    digest: 2771473dff71b35324316d1efca9b92a300f1f566abac9a089f80b7a39631242
+    name: factorio
+    type: application
+    urls:
+    - factorio-1.0.0.tgz
+    version: 1.0.0
   nginx:
   - apiVersion: v2
     appVersion: 1.17.0
-    created: "2020-09-08T23:19:32.635328504-05:00"
+    created: "2020-09-12T21:48:44.721514892-05:00"
     description: nginx instance to serve static content
     digest: f2e9a5cdadb0d4a339be182ca81ca0d64c3010f4aee4f78ab287419c2859a017
     name: nginx
@@ -13,7 +24,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-09-08T23:19:32.634896887-05:00"
+    created: "2020-09-12T21:48:44.720308847-05:00"
     description: nginx instance to serve static content
     digest: 75772b9dc6606c16fa0ffbcbaf4ac922bfcbd94ce2fb6c3227fb179e8c84650b
     name: nginx
@@ -24,7 +35,7 @@ entries:
   rest-server:
   - apiVersion: v2
     appVersion: 0.9.7
-    created: "2020-09-08T23:19:32.636174887-05:00"
+    created: "2020-09-12T21:48:44.724045972-05:00"
     description: Restic Rest Server for remote backups via HTTP
     digest: 1e3446a05a82b7e76e835e66d973326dd8e2a627245788db7f57e66b64c84a53
     name: rest-server
@@ -34,7 +45,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.9.7
-    created: "2020-09-08T23:19:32.635726217-05:00"
+    created: "2020-09-12T21:48:44.722618836-05:00"
     description: Restic Rest Server for remote backups via HTTP
     digest: edadc9013f417a0b259b9cbfba59e44675c03d3e455129d562f668844781280e
     name: rest-server
@@ -45,7 +56,7 @@ entries:
   sftp:
   - apiVersion: v2
     appVersion: debian
-    created: "2020-09-08T23:19:32.636546279-05:00"
+    created: "2020-09-12T21:48:44.725277785-05:00"
     description: SFTP server
     digest: e5208dee8f2dfe5ba539ce629ac017aa52699538ad20e49848b21ebf20fa2d6a
     name: sftp
@@ -53,4 +64,4 @@ entries:
     urls:
     - sftp-0.1.0.tgz
     version: 0.1.0
-generated: "2020-09-08T23:19:32.633973536-05:00"
+generated: "2020-09-12T21:48:44.715864435-05:00"
