@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "factorio.fullname" . }}-config
+  labels:
+    {{- include "factorio.labels" . | nindent 4 }}
+data:
+  # map-gen-settings.json: |
+  #   {}
+  # map-settings.json: |
+  #   {}
+  # rconpw: |
+  #   {}
+  
+  {{- if .Values.config.serverAdminlist }}
+  server-adminlist.json: |
+    {{ .Values.config.serverAdminlist | toJson }}
+  {{- end }}
+
+  {{- if .Values.config.serverBanlist }}
+  server-banlist.json: |
+    {{ .Values.config.serverBanlist | toJson }}
+  {{- end }}
+
+  server-settings.json: | 
+    {{ .Values.config.serverSettings | toJson }}
+
+  {{- if .Values.config.serverWhitelist }}
+  server-whitelist.json: |
+    {{ .Values.config.serverWhitelist | toJson }}
+  {{- end }}
