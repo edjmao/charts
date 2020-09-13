@@ -1,0 +1,126 @@
+# Default values for factorio.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: factoriotools/factorio
+  tag: 1.0.0
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext:
+  fsGroup: 845
+
+securityContext:
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 845
+
+service:
+  type: LoadBalancer
+  port: 34197
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+config:
+  serverSettings:
+    name: 'Name of the game as it will appear in the game listing'
+    description: 'Description of the game that will appear in the listing'
+    tags: []
+    # 'Maximum number of players allowed, admins can join even a full server. 0 means unlimited.'
+    max_players: 0
+    visibility:
+      # Game will be published on the official Factorio matching server'
+      public: false
+      # Game will be broadcast on LAN
+      lan: false
+    # 'Your factorio.com login credentials. Required for games with visibility public'
+    username: ""
+    password: ""
+    # 'Authentication token. May be used instead of ''password'' above.'
+    token: ""
+    game_password: ""
+    # 'When set to true, the server will only allow clients that have a valid Factorio.com account'
+    require_user_verification: true
+    # 'optional, default value is 0. 0 means unlimited.'
+    max_upload_in_kilobytes_per_second: 0
+    # 'optional, default value is 5. 0 means unlimited.'
+    max_upload_slots: 5
+    # 'optional one tick is 16ms in default speed, default value is 0. 0 means no minimum.'
+    minimum_latency_in_ticks: 0
+    # 'Players that played on this map already can join even when the max player limit was reached.'
+    ignore_player_limit_for_returning_players: false
+    # 'possible values are, true, false and admins-only'
+    allow_commands: admins-only
+    # 'Autosave interval in minutes'
+    autosave_interval: 10
+    # 'server autosave slots, it is cycled through when the server autosaves.'
+    autosave_slots: 5
+    # 'How many minutes until someone is kicked when doing nothing, 0 for never.'
+    afk_autokick_interval: 0
+    # 'Whether should the server be paused when no players are present.'
+    auto_pause: true
+    only_admins_can_pause_the_game: true
+    # 'Whether autosaves should be saved only on server or also on all connected clients. Default is true.'
+    autosave_only_on_server: true
+    # 'Highly experimental feature, enable only at your own risk of losing your saves. On UNIX systems, server will fork itself to create an autosave. Autosaving on connected Windows clients will be disabled regardless of autosave_only_on_server option.'
+    non_blocking_saving: false
+    # 'Long network messages are split into segments that are sent over multiple ticks. Their size depends on the number of peers currently connected. Increasing the segment size will increase upload bandwidth requirement for the server and download bandwidth requirement for clients. This setting only affects server outbound messages. Changing these settings can have a negative impact on connection stability for some clients.'
+    minimum_segment_size: 25
+    minimum_segment_size_peer_count: 20
+    maximum_segment_size: 100
+    maximum_segment_size_peer_count: 10
+  
+  # serverWhitelist: []
+  # serverBanlist: []
+  # serverAdminlist: []
+
+persistence:
+  enabled: false
+  # existingClaim: 
